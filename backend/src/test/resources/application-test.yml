@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    clean-disabled: false
+
+server:
+  port: 0
+  servlet:
+    context-path: /
+
+jwt:
+  access-secret: test-access-secret-min-256-bits-for-hs256
+  refresh-secret: test-refresh-secret-min-256-bits-for-hs256

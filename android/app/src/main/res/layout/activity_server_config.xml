@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6F2"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_xl">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_sm"
+        android:fontFamily="sans-serif-medium"
+        android:text="LifePath"
+        android:textColor="#2C2A26"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_xl"
+        android:text="Enter your server URL to get started"
+        android:textColor="#6B6560"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/serverUrlInput"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/input_background"
+        android:fontFamily="sans-serif"
+        android:hint="http://192.168.1.x:39173"
+        android:inputType="textUri"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:textColor="#2C2A26"
+        android:textColorHint="#8B8680"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:layout_marginBottom="@dimen/spacing_sm"
+        android:text="API URL (optional)"
+        android:textColor="#6B6560"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/apiUrlInput"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/input_background"
+        android:fontFamily="sans-serif"
+        android:hint="http://192.168.1.x:39081"
+        android:inputType="textUri"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:textColor="#2C2A26"
+        android:textColorHint="#8B8680"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="Leave blank if UI and API share the same URL"
+        android:textColor="#8B8680"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:background="@drawable/button_primary"
+        android:fontFamily="sans-serif-medium"
+        android:text="Connect"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  padding: var(--spacing-md) var(--spacing-md) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.streaksSection {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+}
+
+.streaksHeader {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.streaksList {
+  background: var(--color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.streakItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+}
+
+.streakItem:last-child {
+  border-bottom: none;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.refreshBtn {
+  min-width: var(--tap-min-width);
+  min-height: var(--tap-min-height);
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.refreshBtn:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.addBtn {
+  min-height: var(--tap-min-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.list {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-secondary);
+}
+
+.emptyState p {
+  margin-bottom: var(--spacing-md);
+}
+
+.emptyCta {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+

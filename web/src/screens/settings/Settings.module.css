@@ -1,0 +1,234 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-background);
+  padding-bottom: var(--spacing-xl);
+}
+
+.apkBanner {
+  margin: var(--spacing-md) var(--spacing-md) 0;
+  background: linear-gradient(135deg, #C4785A 0%, #D4937A 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.apkBannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.apkBannerTitle {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.apkBannerSubtitle {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+
+.apkBannerBtn {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.15s ease;
+}
+
+.apkBannerBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.group {
+  margin-top: var(--spacing-lg);
+}
+
+.groupHeader {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 0 var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.urlValue {
+  font-size: 13px;
+  color: var(--color-text);
+  word-break: break-all;
+  flex: 1;
+  margin-right: var(--spacing-sm);
+}
+
+.editableValue {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0;
+}
+
+.editHint {
+  font-size: 12px;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.editRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+  max-width: 240px;
+}
+
+.rowHint {
+  padding: var(--spacing-md);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rowHint:last-child {
+  border-bottom: none;
+}
+
+.calendarError {
+  padding: var(--spacing-md);
+  font-size: 13px;
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.08);
+  border-top: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.companionPicker {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+
+.companionBtn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color var(--duration-short) var(--ease-snappy),
+    background-color var(--duration-short) var(--ease-snappy);
+}
+
+.companionBtn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
+
+.companionSelected {
+  border-color: var(--color-primary);
+  background: rgba(196, 120, 90, 0.08);
+}
+
+.companionIcon {
+  font-size: 40px;
+}
+
+.companionLabel {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-text);
+}
+
+.connectedBadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #34c759;
+  background: rgba(52, 199, 89, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: var(--spacing-sm);
+}
+
+.tzSelect {
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  max-width: 200px;
+  cursor: pointer;
+}
+
+.logoutBtn {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-destructive);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.versionInfo {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
+}
+
+.buildTime {
+  opacity: 0.8;
+}

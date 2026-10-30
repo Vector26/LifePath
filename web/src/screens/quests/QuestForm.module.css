@@ -1,0 +1,64 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form {
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-lg);
+}
+
+.field {
+  margin-bottom: var(--spacing-lg);
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.error {
+  color: var(--color-destructive);
+  font-size: 14px;
+  margin: 0 0 var(--spacing-md);
+}
+
+.deleteSection {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.deleteTrigger {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  color: var(--color-destructive);
+  cursor: pointer;
+}
+
+.deleteConfirm {
+  font-size: 14px;
+  margin-bottom: var(--spacing-md);
+}
+
+.deleteActions {
+  display: flex;
+  gap: var(--spacing-md);
+}

@@ -1,0 +1,14 @@
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.dot.online {
+  background: var(--color-success);
+}
+
+.dot.offline {
+  background: var(--color-text-muted);
+}

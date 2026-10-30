@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_md">
+
+    <TextView
+        android:id="@+id/objectiveType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/type_pill"
+        android:fontFamily="sans-serif"
+        android:paddingStart="@dimen/spacing_sm"
+        android:paddingTop="@dimen/spacing_xs"
+        android:paddingEnd="@dimen/spacing_sm"
+        android:paddingBottom="@dimen/spacing_xs"
+        android:text="Quest"
+        android:textAllCaps="true"
+        android:textColor="#8B8680"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/objectiveTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="2"
+        android:text="Current objective"
+        android:textColor="#2C2A26"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginBottom="@dimen/spacing_xs"
+        android:background="#E0DCD6" />
+
+    <TextView
+        android:id="@+id/statsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="0 quests · 0 habits"
+        android:textColor="#2C2A26"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/queueHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:fontFamily="sans-serif"
+        android:gravity="end"
+        android:text="0 queued"
+        android:textColor="#8B8680"
+        android:textSize="11sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/openButton"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:background="@drawable/button_primary"
+        android:gravity="center"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:text="Open"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+</LinearLayout>

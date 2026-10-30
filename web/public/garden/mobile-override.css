@@ -1,0 +1,248 @@
+@media (max-width: 768px) {
+  html, body {
+    overflow: hidden;
+    height: 100%;
+    height: 100dvh;
+  }
+
+  .game-container {
+    padding: 0 !important;
+    overflow: hidden !important;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .game-header {
+    padding: 4px 8px !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(255,255,255,0.97) !important;
+  }
+
+  .header-top {
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .header-top button {
+    padding: 3px 6px !important;
+    font-size: 0.65rem !important;
+    min-height: 24px !important;
+    min-width: unset !important;
+    border-radius: 4px !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .stats {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 2px !important;
+    padding: 2px 0 !important;
+  }
+  .stat {
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    flex: 0 0 auto;
+  }
+  .stat-label { font-size: 0.6rem !important; }
+  .stat-value { font-size: 0.7rem !important; }
+
+  .game-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    height: calc(100vh - 68px) !important;
+    height: calc(100dvh - 68px) !important;
+    overflow: hidden !important;
+    grid-template-columns: unset !important;
+  }
+
+  .garden-area {
+    order: 1 !important;
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    padding: 2px !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    max-height: none !important;
+    min-height: unset !important;
+  }
+
+  .garden-info { display: none !important; }
+
+  .season-display {
+    padding: 2px 6px !important;
+    margin-bottom: 2px !important;
+    font-size: 0.7rem !important;
+    border-radius: 4px !important;
+  }
+  #seasonText { font-size: 0.75rem !important; }
+  .growth-multiplier { font-size: 0.65rem !important; }
+
+  #gardenCanvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    border-width: 2px !important;
+    object-fit: contain;
+  }
+
+  .sidebar {
+    order: 2 !important;
+    max-height: 42vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1) !important;
+    background: rgba(255,255,255,0.98) !important;
+  }
+
+  .mobile-tab-bar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-shrink: 0;
+  }
+  .mobile-tab-bar button {
+    flex: 1 0 auto;
+    padding: 6px 10px;
+    border: none;
+    background: transparent;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .mobile-tab-bar button.active {
+    color: #4caf50;
+    border-bottom-color: #4caf50;
+  }
+
+  .sidebar > .mobile-tab-content { padding: 6px 8px; }
+
+  .seed-shop, .sprinkler-shop, .decoration-shop, .tools,
+  .purchase-shop, .achievements-section, .challenges-section,
+  .stats-section, .instructions {
+    margin-bottom: 4px !important;
+  }
+
+  .seed-shop h3, .sprinkler-shop h3, .tools h3, .tools h4,
+  .decoration-shop h3, .purchase-shop h3,
+  .achievements-section h3, .challenges-section h3,
+  .stats-section h3, .instructions h3,
+  .seed-shop h4 {
+    font-size: 0.8rem !important;
+    margin: 2px 0 !important;
+    padding: 0 !important;
+  }
+
+  .seed-item {
+    padding: 5px 6px !important;
+    margin-bottom: 3px !important;
+    border-radius: 6px !important;
+    min-height: unset !important;
+    gap: 6px;
+  }
+  .seed-item img { width: 24px !important; height: 24px !important; }
+  .seed-name { font-size: 0.75rem !important; }
+  .seed-price { font-size: 0.7rem !important; }
+  .seed-stock { font-size: 0.6rem !important; }
+
+  .tool-btn, .upgrade-btn, .sprinkler-tool {
+    padding: 5px 8px !important;
+    margin-bottom: 3px !important;
+    min-height: 28px !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
+  }
+  .tool-level, .upgrade-cost {
+    font-size: 0.6rem !important;
+    padding: 1px 4px !important;
+  }
+
+  .sprinkler-item {
+    padding: 5px 6px !important;
+    margin-bottom: 3px !important;
+    min-height: unset !important;
+  }
+  .sprinkler-name { font-size: 0.75rem !important; }
+  .sprinkler-price { font-size: 0.7rem !important; }
+  .sprinkler-desc { font-size: 0.6rem !important; }
+
+  .purchase-shop {
+    margin: 4px 0 !important;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+  }
+  .purchase-item {
+    padding: 6px 8px !important;
+    margin-bottom: 3px !important;
+  }
+  .purchase-name { font-size: 0.75rem !important; }
+  .purchase-price { font-size: 0.7rem !important; }
+  .purchase-description { font-size: 0.6rem !important; }
+  .purchase-btn {
+    padding: 4px 10px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .decoration-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+    gap: 4px !important;
+  }
+  .decoration-item { padding: 4px !important; }
+  .decoration-icon { font-size: 1rem !important; min-width: 20px !important; }
+  .decoration-name { font-size: 0.65rem !important; }
+  .decoration-cost { font-size: 0.6rem !important; }
+  .decoration-description { font-size: 0.55rem !important; }
+  .decoration-info-panel { padding: 6px !important; font-size: 0.7rem !important; }
+  .category-btn { padding: 3px 8px !important; font-size: 0.65rem !important; }
+
+  .achievement-item, .challenge-item {
+    padding: 4px 6px !important;
+    margin-bottom: 3px !important;
+  }
+  .achievement-name, .challenge-title { font-size: 0.75rem !important; }
+  .achievement-description, .challenge-description { font-size: 0.65rem !important; }
+  .progress-text { font-size: 0.6rem !important; }
+
+  .instructions li {
+    padding: 1px 0 !important;
+    font-size: 0.7rem !important;
+  }
+
+  .menu-btn, .save-btn, .expand-btn, .admin-btn {
+    padding: 3px 8px !important;
+    font-size: 0.7rem !important;
+    min-height: 24px !important;
+  }
+
+  .save-slots { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .game-content {
+    height: calc(100vh - 60px) !important;
+    height: calc(100dvh - 60px) !important;
+  }
+  .sidebar { max-height: 38vh !important; }
+}

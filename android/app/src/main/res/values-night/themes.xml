@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LifePath" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">#D4937A</item>
+        <item name="colorPrimaryDark">#1E1C19</item>
+        <item name="colorAccent">#D4937A</item>
+        <item name="android:windowBackground">#1E1C19</item>
+        <item name="android:statusBarColor">#1E1C19</item>
+        <item name="android:navigationBarColor">#2C2A26</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

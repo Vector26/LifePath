@@ -1,0 +1,102 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: var(--spacing-md) var(--spacing-md) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.refreshBtn {
+  min-width: var(--tap-min-width);
+  min-height: var(--tap-min-height);
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.refreshBtn:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.loading {
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+}
+
+.connectCard {
+  margin: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.connectCard p {
+  margin: 0 0 var(--spacing-md);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.connectLink {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.connectLink:hover {
+  text-decoration: underline;
+}
+
+.emptyState {
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-md);
+}
+
+.event {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.eventCompleted {
+  opacity: 0.7;
+}
+
+.eventTime {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.eventTitle {
+  font-weight: 500;
+}
+
+.completedBadge {
+  display: inline-block;
+  font-size: 11px;
+  color: #34c759;
+  margin-left: var(--spacing-sm);
+}

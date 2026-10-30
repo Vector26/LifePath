@@ -1,0 +1,1087 @@
+openapi: 3.0.3
+info:
+  title: LifePath API
+  description: RESTful API for the LifePath gamified productivity application
+  version: 1.0.0
+
+servers:
+  - url: https://api.lifepath.app/api/v1
+    description: Production
+  - url: http://localhost:3000/api/v1
+    description: Local development
+
+tags:
+  - name: Auth
+  - name: Users
+  - name: Quests
+  - name: Habits
+  - name: City
+  - name: Streaks
+  - name: Stats
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          description: Email already exists
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh access token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshResponse'
+        '401':
+          description: Invalid refresh token
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      security:
+        - BearerAuth: []
+      summary: Logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoutRequest'
+      responses:
+        '204':
+          description: No Content
+
+  /users/me:
+    get:
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      summary: Get current user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    patch:
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      summary: Update current user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /users/me/settings:
+    get:
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      summary: Get user settings
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettings'
+
+  /quests:
+    get:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: List quests
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, blocked, completed]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 100
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestListResponse'
+    post:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Create quest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateQuestRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quest'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          description: Circular dependency
+
+  /quests/current:
+    get:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Get current objective
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentQuestResponse'
+        '204':
+          description: No eligible quest
+
+  /quests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Get quest by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Update quest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQuestRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Soft-delete quest
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Quest has dependent quests
+
+  /quests/{id}/complete:
+    post:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Complete quest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteQuestResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          description: Quest already completed or blocked
+
+  /quests/{id}/block:
+    post:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Block quest (IO-Wait)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlockQuestRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /quests/{id}/unblock:
+    post:
+      tags: [Quests]
+      security:
+        - BearerAuth: []
+      summary: Unblock quest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /habits:
+    get:
+      tags: [Habits]
+      security:
+        - BearerAuth: []
+      summary: List habits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HabitListResponse'
+    post:
+      tags: [Habits]
+      security:
+        - BearerAuth: []
+      summary: Create habit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHabitRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Habit'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+
+  /habits/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    delete:
+      tags: [Habits]
+      security:
+        - BearerAuth: []
+      summary: Soft-delete habit
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [Habits]
+      security:
+        - BearerAuth: []
+      summary: Update habit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHabitRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Habit'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /habits/{id}/complete:
+    post:
+      tags: [Habits]
+      security:
+        - BearerAuth: []
+      summary: Complete habit
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HabitCompletionResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /city/state:
+    get:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: Get city state (coins, name, population)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityState'
+
+  /city/shop:
+    get:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: List available building definitions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildingDefinition'
+
+  /city/buildings:
+    get:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: List user's placed buildings
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserBuilding'
+    post:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: Place a building
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceBuildingRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBuilding'
+        '409':
+          description: Cell already occupied
+        '422':
+          description: Insufficient coins or invalid position
+
+  /city/buildings/{id}/maintain:
+    post:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: Maintain (repair) a decayed building
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBuilding'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          description: Insufficient coins
+
+  /city/buildings/{id}:
+    delete:
+      tags: [City]
+      security:
+        - BearerAuth: []
+      summary: Demolish a building
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coins_refunded:
+                    type: integer
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /streaks:
+    get:
+      tags: [Streaks]
+      security:
+        - BearerAuth: []
+      summary: List all streaks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreakListResponse'
+
+  /stats/today:
+    get:
+      tags: [Stats]
+      security:
+        - BearerAuth: []
+      summary: Get today's completion counts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodayStatsResponse'
+
+  /streaks/{habitId}:
+    get:
+      tags: [Streaks]
+      security:
+        - BearerAuth: []
+      summary: Get streak for habit
+      parameters:
+        - name: habitId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Streak'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, password, timezone]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        display_name:
+          type: string
+          maxLength: 100
+        timezone:
+          type: string
+          example: America/New_York
+        companion_type:
+          type: string
+          enum: [plant, creature]
+          default: plant
+
+    RegisterResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+
+    RefreshRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+
+    RefreshResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+
+    LogoutRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        display_name:
+          type: string
+        timezone:
+          type: string
+        total_xp:
+          type: integer
+        level:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        display_name:
+          type: string
+          maxLength: 100
+        timezone:
+          type: string
+
+    UserSettings:
+      type: object
+      properties:
+        notifications_enabled:
+          type: boolean
+        haptic_feedback:
+          type: boolean
+        theme:
+          type: string
+          enum: [system, light, dark]
+
+    Quest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        notes:
+          type: string
+        priority_level:
+          type: string
+          enum: [P0, P1, P2, P3, P4]
+        parent_id:
+          type: string
+          format: uuid
+          nullable: true
+        status:
+          type: string
+          enum: [pending, blocked, completed]
+        time_of_day:
+          type: string
+          enum: [morning, afternoon, evening, any]
+        context_tag:
+          type: string
+          enum: [focus, quick, low_energy]
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    CreateQuestRequest:
+      type: object
+      required: [title, priority_level]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        notes:
+          type: string
+          maxLength: 5000
+        priority_level:
+          type: string
+          enum: [P0, P1, P2, P3, P4]
+        parent_id:
+          type: string
+          format: uuid
+          nullable: true
+        time_of_day:
+          type: string
+          enum: [morning, afternoon, evening, any]
+        context_tag:
+          type: string
+          enum: [focus, quick, low_energy]
+
+    UpdateQuestRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        notes:
+          type: string
+          maxLength: 5000
+        priority_level:
+          type: string
+          enum: [P0, P1, P2, P3, P4]
+        parent_id:
+          type: string
+          format: uuid
+          nullable: true
+        time_of_day:
+          type: string
+          enum: [morning, afternoon, evening, any]
+        context_tag:
+          type: string
+          enum: [focus, quick, low_energy]
+
+    QuestListResponse:
+      type: object
+      properties:
+        quests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quest'
+        next_cursor:
+          type: string
+          nullable: true
+
+    CompleteQuestResponse:
+      type: object
+      properties:
+        quest:
+          $ref: '#/components/schemas/Quest'
+        xp_earned:
+          type: integer
+
+    CurrentQuestResponse:
+      type: object
+      properties:
+        quest:
+          $ref: '#/components/schemas/Quest'
+        reasons:
+          type: array
+          items:
+            type: string
+
+    BlockQuestRequest:
+      type: object
+      required: [unblock_trigger]
+      properties:
+        reason:
+          type: string
+        unblock_trigger:
+          type: string
+          enum: [manual, time, location]
+        unblock_at:
+          type: string
+          format: date-time
+          nullable: true
+        unblock_location:
+          type: string
+          nullable: true
+
+    Habit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        currency_per_completion:
+          type: integer
+        is_streak_tracked:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    CreateHabitRequest:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        currency_per_completion:
+          type: integer
+          default: 10
+        is_streak_tracked:
+          type: boolean
+          default: true
+
+    UpdateHabitRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        currency_per_completion:
+          type: integer
+        is_streak_tracked:
+          type: boolean
+
+    HabitListResponse:
+      type: object
+      properties:
+        habits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Habit'
+
+    HabitCompletionResponse:
+      type: object
+      properties:
+        habit:
+          $ref: '#/components/schemas/Habit'
+        currency_earned:
+          type: integer
+        streak:
+          type: object
+          properties:
+            current_streak_days:
+              type: integer
+            longest_streak_days:
+              type: integer
+
+    CityState:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        coins:
+          type: integer
+        premium_currency:
+          type: integer
+        city_name:
+          type: string
+        population:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    BuildingDefinition:
+      type: object
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        cost:
+          type: integer
+        sprite_key:
+          type: string
+        tile_gid:
+          type: integer
+        ttl_seconds:
+          type: integer
+        decay_grace_seconds:
+          type: integer
+        maintenance_cost:
+          type: integer
+
+    UserBuilding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        sprite_key:
+          type: string
+        tile_gid:
+          type: integer
+        grid_x:
+          type: integer
+        grid_y:
+          type: integer
+        placed_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        decayed_at:
+          type: string
+          format: date-time
+          nullable: true
+        remove_after_at:
+          type: string
+          format: date-time
+          nullable: true
+        maintenance_cost:
+          type: integer
+
+    PlaceBuildingRequest:
+      type: object
+      required: [type, gridX, gridY]
+      properties:
+        type:
+          type: string
+        gridX:
+          type: integer
+        gridY:
+          type: integer
+
+    TodayStatsResponse:
+      type: object
+      properties:
+        quests_completed_today:
+          type: integer
+        habits_completed_today:
+          type: integer
+        date:
+          type: string
+          format: date
+
+    Streak:
+      type: object
+      properties:
+        habit_id:
+          type: string
+          format: uuid
+        habit_title:
+          type: string
+        current_streak_days:
+          type: integer
+        longest_streak_days:
+          type: integer
+        last_completed_date:
+          type: string
+          format: date
+          nullable: true
+
+    StreakListResponse:
+      type: object
+      properties:
+        streaks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Streak'
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  reason:
+                    type: string

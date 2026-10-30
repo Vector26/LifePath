@@ -1,0 +1,101 @@
+.wrapper {
+  position: fixed;
+  bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 16px);
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.wrapper > * {
+  pointer-events: auto;
+}
+
+@media (min-width: 601px) {
+  .wrapper {
+    bottom: 24px;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 12px;
+  margin-bottom: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.9);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.wrapperOpen .actions {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.action:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.actionIcon {
+  font-size: 22px;
+}
+
+.fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.2s ease;
+}
+
+.fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.fabIcon {
+  font-size: 28px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.fabOpen .fabIcon {
+  transform: rotate(90deg);
+}

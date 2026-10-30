@@ -1,0 +1,30 @@
+.fab {
+  position: fixed;
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 24px);
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: transform var(--duration-micro, 150ms) var(--ease-snappy, cubic-bezier(0.25, 0.46, 0.45, 0.94)),
+    box-shadow 0.25s ease;
+}
+
+@media (min-width: 601px) {
+  .fab {
+    bottom: 24px;
+  }
+}
+
+.fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}

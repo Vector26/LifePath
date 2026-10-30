@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lifepath
+    username: lifepath
+    password: lifepath
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+
+# Google Calendar OAuth — set via env (see .env.example).
+google:
+  client-id: ${GOOGLE_CLIENT_ID:}
+  client-secret: ${GOOGLE_CLIENT_SECRET:}
+  redirect-uri: ${GOOGLE_REDIRECT_URI:http://localhost:39081/api/v1/calendar/callback}

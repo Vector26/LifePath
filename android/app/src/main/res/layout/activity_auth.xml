@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6F2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_lg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:fontFamily="sans-serif-medium"
+            android:text="LifePath"
+            android:textColor="#2C2A26"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            android:text="Connect your server and sign in"
+            android:textColor="#6B6560"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/changeServerLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_sm"
+            android:text="Change server"
+            android:textColor="#6B6560"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/urlFieldsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/webUrlInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/input_background"
+                android:hint="Web URL (e.g. http://100.x.x.x:39173)"
+                android:inputType="textUri"
+                android:paddingStart="@dimen/spacing_md"
+                android:paddingEnd="@dimen/spacing_md"
+                android:textColor="#2C2A26"
+                android:textColorHint="#8B8680" />
+
+            <EditText
+                android:id="@+id/apiUrlInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:background="@drawable/input_background"
+                android:hint="API URL (optional, e.g. http://100.x.x.x:39081)"
+                android:inputType="textUri"
+                android:paddingStart="@dimen/spacing_md"
+                android:paddingEnd="@dimen/spacing_md"
+                android:textColor="#2C2A26"
+                android:textColorHint="#8B8680" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/saveCredentialsCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="Save credentials for automatic sign-in when session expires"
+            android:textColor="#6B6560"
+            android:textSize="14sp"
+            android:checked="true" />
+
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:background="@drawable/input_background"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/spacing_md"
+            android:paddingEnd="@dimen/spacing_md"
+            android:textColor="#2C2A26"
+            android:textColorHint="#8B8680" />
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:background="@drawable/input_background"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/spacing_md"
+            android:paddingEnd="@dimen/spacing_md"
+            android:textColor="#2C2A26"
+            android:textColorHint="#8B8680" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:background="@drawable/button_primary"
+            android:text="Sign In"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/loginProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
