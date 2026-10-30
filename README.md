@@ -1,8 +1,9 @@
 <div align="center">
 
-# LifePath
-
-**Gamified productivity — quests, habits, and a living city that grows with you.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/header-dark.svg">
+  <img src="docs/readme/header-light.svg" width="100%" alt="LifePath — gamified productivity, quests, habits, living city">
+</picture>
 
 [![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-API-6DB33F?style=flat-square&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -10,13 +11,22 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Docker_%7C_Linux-lightgrey?style=flat-square)](DOCKER.md)
 
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/divider-dark.svg">
+  <img src="docs/readme/divider-light.svg" width="100%" alt="">
+</picture>
 
----
+</div>
 
 ## Why it exists
 
 Most todo apps feel like spreadsheets with notifications. **LifePath** treats progress as a game: complete quests, keep streaks, and watch a **city/garden** reflect how you show up day to day. One backend, a polished web client, and an Android app share the same OpenAPI contract — so your habits follow you across devices.
+
+## Highlights
+
+- 🏙️ **City / garden view** — the world changes when you show up
+- ⚔️ **Quests & habits** — streaks and reward loops that stay motivating
+- 📱 **OpenAPI contract** — web, API, and Android share `openapi/lifepath-api.yaml`
 
 ## Features
 
@@ -121,10 +131,4 @@ Google Calendar requires OAuth client credentials in the backend — see `docs/b
 
 ---
 
-<div align="center">
-
-**MIT** — see [LICENSE](./LICENSE)
-
-Built by **[Vector26](https://github.com/Vector26)** · Homelab-grade full stack, open source
-
-</div>
+[Vector26](https://github.com/Vector26) · [MIT License](LICENSE)
